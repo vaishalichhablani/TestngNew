@@ -1,6 +1,7 @@
 package org.testing.testScripts;
 
 import io.restassured.response.Response;
+import org.testing.ResponseValidations.responseValidations;
 import org.testing.Utilities.*;
 import org.testing.testSteps.HttpMethods;
 import org.testng.annotations.Test;
@@ -22,6 +23,9 @@ public class TC1_PostRequest {
         requestbody = JSONReplacement.Jsonhandling(requestbody, "id", idvalue);
         HttpMethods http = new HttpMethods(pr1);
          Response res = http.POSTRequest(requestbody, "BATCH_URI");
+
+        responseValidations.responseValidationStatusCode(201,res);
+
         returnidvalue = ParsingJSONUsingJsonpath.jsonparse(res,"id");
         System.out.println( "value of the id is :"+returnidvalue);
 
